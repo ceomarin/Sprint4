@@ -3,16 +3,21 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Capacitacion {
-    private int id;
+	private final int id;
     private int rut;
     private LocalDate dia;
     private LocalTime hora;
     private String lugar;
     private int duracion;
     private int cantidadAsistentes;
+    private static int contador;
 
-    public Capacitacion(int id, int rut, LocalDate dia, LocalTime hora, String lugar, int duracion, int cantidadAsistentes) {
-        this.id = id;
+    private Capacitacion() {
+    	this.id = ++Capacitacion.contador;
+    }
+    
+    public Capacitacion(int rut, LocalDate dia, LocalTime hora, String lugar, int duracion, int cantidadAsistentes) {
+        this();
         this.rut = rut;
         this.dia = dia;
         this.hora = hora;
@@ -23,10 +28,6 @@ public class Capacitacion {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getRut() {
@@ -76,22 +77,18 @@ public class Capacitacion {
     public void setCantidadAsistentes(int cantidadAsistentes) {
         this.cantidadAsistentes = cantidadAsistentes;
     }
-    public void mostrarDetalle() {
+    
+    public void mostrarDetalle() {	
         System.out.println("La capacitación será en " + lugar + " a las " + hora 
         		+ " del día " + dia + ", y durará " + duracion + " minutos");
     }
 
-    @Override
-    public String toString() {
-        return "Capacitacion{" +
-                "identificador=" + id +
-                ", rutCliente=" + rut +
-                ", dia='" + dia + '\'' +
-                ", hora='" + hora + '\'' +
-                ", lugar='" + lugar + '\'' +
-                ", duracion='" + duracion + '\'' +
-                ", cantidadAsistentes=" + cantidadAsistentes +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Capacitacion [id=" + id + ", rut=" + rut + ", dia=" + dia + ", hora=" + hora + ", lugar=" + lugar
+				+ ", duracion=" + duracion + ", cantidadAsistentes=" + cantidadAsistentes + "]";
+	}
+
+
     
 }

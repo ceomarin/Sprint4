@@ -4,25 +4,27 @@ import java.time.LocalDate;
 import java.time.Period;
 
 class Usuario implements Asesoria {
-    private String nombre;
-    private LocalDate fechaNacimiento;
-    private int run;
+    protected String nombres;
+    protected String apellidos;
+    protected LocalDate fechaNacimiento;
+    protected int run;
 
     public Usuario() {
     }
 
-    public Usuario(String nombre, LocalDate fechaNacimiento, int run) {
-        this.nombre = nombre;
+    public Usuario(String nombres,String apellidos, LocalDate fechaNacimiento, int run) {
+        this.nombres = nombres;
+        this.apellidos = apellidos;
         this.fechaNacimiento = fechaNacimiento;
         this.run = run;
     }
 
     public String getNombre() {
-		return nombre;
+		return nombres;
 	}
 
 	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		this.nombres = nombre;
 	}
 
 	public LocalDate getFechaNacimiento() {
@@ -41,24 +43,41 @@ class Usuario implements Asesoria {
 		this.run = run;
 	}
 
-	public void analizarUsuario() {
-        System.out.println("Nombre: " + nombre);
-        System.out.println("RUN: " + run);
-    }
+    public String getNombres() {
+		return nombres;
+	}
 
-    public String mostrarEdad() {
+	public void setNombres(String nombres) {
+		this.nombres = nombres;
+	}
+
+	public String getApellidos() {
+		return apellidos;
+	}
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
+	public String mostrarEdad() {
     	Period edad = Period.between(fechaNacimiento, LocalDate.now());
     	return "El usuario tiene "+ edad.getYears() + " años";
     }
-
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "nombre='" + nombre + '\'' +
-                ", fechaNacimiento='" + fechaNacimiento + '\'' +
-                ", run=" + run +
-                '}';
+	
+	@Override
+	public void analizarUsuario() {
+        System.out.println("Nombre: " + nombres);
+        System.out.println("Apellido: " + apellidos);
+        System.out.println("RUN: " + run);
     }
+
+	@Override
+	public String toString() {
+		return "Usuario [nombres=" + nombres + ", apellidos=" + apellidos + ", fechaNacimiento=" + fechaNacimiento
+				+ ", run=" + run + "]";
+	}
+
+
 }
 
 

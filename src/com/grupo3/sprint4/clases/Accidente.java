@@ -3,7 +3,6 @@ package com.grupo3.sprint4.clases;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-
 public class Accidente {
 	private final int id;
 	private int rutCliente;

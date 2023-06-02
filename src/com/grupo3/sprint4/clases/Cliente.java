@@ -1,14 +1,13 @@
 package com.grupo3.sprint4.clases;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Cliente extends Usuario{
-	    private String apellidos;
 	    private String telefono;
 	    private String afp;
-	    private String sistemaSalud;
+	    private int sistemaSalud;
 	    private String direccion;
 	    private String comuna;
-	    private int edad;
 	    private ArrayList<Capacitacion> capacitacion;
 	    private ArrayList<Accidente> accidente;
 	    private ArrayList<VisitaEnTerreno> visitaTerreno;
@@ -17,45 +16,14 @@ public class Cliente extends Usuario{
 
 	    }
 
-	    public Cliente (String apellidos, String telefono,
-	    		String afp, String sistemaSalud, String direccion, String comuna, int edad) {
-	    	super();
-	        this.apellidos = apellidos;
+	    public Cliente (String nombres,String apellidos,LocalDate fechaNacimiento,int run,
+	    		String telefono,String afp, int sistemaSalud, String direccion, String comuna) {
+	    	super(nombres,apellidos,fechaNacimiento,run);
 	        this.telefono = telefono;
 	        this.afp = afp;
-
-	       // if (sistemaSalud.equals("Fonasa") || sistemaSalud.equals("Isalpre")) {
-	       //     this.sistemaSalud = sistemaSalud;
-	       // } else {
-	       //     System.out.println("no es una opcion valida");
-	       // }
-
+	        this.sistemaSalud = sistemaSalud;
 	        this.direccion = direccion;
 	        this.comuna = comuna;
-	        this.edad = edad;
-	    }
-	    public int getRut() {
-	        return rut;
-	    }
-
-	    public void setRut(int rut) {
-	        this.rut = rut;
-	    }
-
-	    public String getNombres() {
-	        return nombres;
-	    }
-
-	    public void setNombres(String nombres) {
-	        this.nombres = nombres;
-	    }
-
-	    public String getApellidos() {
-	        return apellidos;
-	    }
-
-	    public void setApellidos(String apellidos) {
-	        this.apellidos = apellidos;
 	    }
 
 	    public String getTelefono() {
@@ -73,11 +41,11 @@ public class Cliente extends Usuario{
 	    public void setAfp(String afp) {
 	        this.afp = afp;
 	    }
-	    public String getSistemaSalud() {
+	    public int getSistemaSalud() {
 	        return sistemaSalud;
 	    }
 
-	    public void setSistemaSalud(String sistemaSalud) {
+	    public void setSistemaSalud(int sistemaSalud) {
 	        this.sistemaSalud = sistemaSalud;
 	    }
 
@@ -95,14 +63,6 @@ public class Cliente extends Usuario{
 
 	    public void setComuna(String comuna) {
 	        this.comuna = comuna;
-	    }
-
-	    public int getEdad() {
-	        return edad;
-	    }
-
-	    public void setEdad(int edad) {
-	        this.edad = edad;
 	    }
 
 	    public ArrayList<Capacitacion> getCapacitacion() {
@@ -148,24 +108,15 @@ public class Cliente extends Usuario{
 	        System.out.println("Dirección: " + direccion);
 	        System.out.println("Comuna: " + comuna);
 	    }
+
+		@Override
+		public String toString() {
+			return "Cliente [telefono=" + telefono + ", afp=" + afp + ", sistemaSalud=" + sistemaSalud + ", direccion="
+					+ direccion + ", comuna=" + comuna + ", capacitacion=" + capacitacion + ", accidente=" + accidente
+					+ ", visitaTerreno=" + visitaTerreno + ", nombres=" + nombres + ", apellidos=" + apellidos
+					+ ", fechaNacimiento=" + fechaNacimiento + ", run=" + run + "]";
+		}
 	    
 
-	    @Override
-	    public String toString() {
-	        return "Cliente{" +
-	        "rut=" + rut +
-	        ", nombres='" + nombres + '\'' +
-	        ", apellidos='" + apellidos + '\'' +
-	        ", telefono='" + telefono + '\'' +
-	        ", afp='" + afp + '\'' +
-	        ", sistemaSalud='" + sistemaSalud + '\'' +
-	        ", direccion='" + direccion + '\'' +
-	        ", comuna='" + comuna + '\'' +
-	        ", edad=" + edad +
-	        ", capacitacion=" + capacitacion +
-	        ", accidente=" + accidente +
-	        ", visitaTerreno=" + visitaTerreno +
-	        '}';
-	    }
 
 }

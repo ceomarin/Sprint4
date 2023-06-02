@@ -5,19 +5,21 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class VisitaEnTerreno {
-	private int id;
+	private final int id;
 	private int rut;
 	private LocalDate dia;
 	private LocalTime hora;
 	private String lugar;
 	private String comentarios;
-	private ArrayList<Revision> revision; 
+	private ArrayList<Revision> revision;
+	private static int contador;
 
-	public VisitaEnTerreno() {
+	private VisitaEnTerreno() {
+		this.id = ++VisitaEnTerreno.contador;
 	}
 
-	public VisitaEnTerreno(int id, int rut, LocalDate dia, LocalTime hora, String lugar, String comentarios) {
-		this.id = id;
+	public VisitaEnTerreno( int rut, LocalDate dia, LocalTime hora, String lugar, String comentarios) {
+		this();
 		this.rut = rut;
 		this.dia = dia;
 		this.hora = hora;
@@ -27,10 +29,6 @@ public class VisitaEnTerreno {
 
 	public int getId() {
 		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public int getRut() {
