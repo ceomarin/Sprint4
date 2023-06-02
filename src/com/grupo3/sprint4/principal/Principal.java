@@ -23,10 +23,7 @@ public class Principal {
 	public static void main(String[] args) {
 		boolean salida = false;
 		int tarea=0;
-//		ArrayList<Asesoria> listaAsesoria = new ArrayList<Asesoria>();
-		
-		
-		
+				
 		while(!salida) {
 			menu();
 			System.out.println("Escribe el número de la tarea a realizar");
@@ -35,15 +32,9 @@ public class Principal {
 	        switch(tarea){
 	        case 1:
 	        	almacenarCliente();
-//	        	Cliente cliente1 = new Cliente("john","Doe",LocalDate.of(1980,12,01),11111111,"123456789","Cuprum",1,"Socoroma 555","Santiago");
-//	        	contenedor.almacenarCliente(cliente1);
-//	        	contenedor.listarUsuarios();
 	            break;
 	        case 2:
 	        	almacenarProfesional();
-	        	Profesional profesional1 = new Profesional("john","Doe",LocalDate.of(1980,12,01),11111111,"Licenciado",LocalDate.of(2022,01,02));
-	        	contenedor.almacenarCliente(profesional1);
-	        	contenedor.listarUsuarios();
 	            break;
 	         case 3:
 	        	 almacenarAdministrativo();
