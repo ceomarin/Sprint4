@@ -2,6 +2,7 @@ package com.grupo3.sprint4.clases;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class VisitaEnTerreno {
 	private int id;
@@ -10,6 +11,7 @@ public class VisitaEnTerreno {
 	private LocalTime hora;
 	private String lugar;
 	private String comentarios;
+	private ArrayList<Revision> revision; 
 
 	public VisitaEnTerreno() {
 	}
@@ -71,6 +73,14 @@ public class VisitaEnTerreno {
 		this.comentarios = comentarios;
 	}
 
+	public ArrayList<Revision> getRevision() {
+		return revision;
+	}
+
+	public void setRevision(ArrayList<Revision> revision) {
+		this.revision = revision;
+	}
+	
 	@Override
 	public String toString() {
 		return "VisitaEnTerreno [id=" + id + ", rut=" + rut + ", dia=" + dia + ", hora=" + hora + ", lugar=" + lugar

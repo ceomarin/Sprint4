@@ -1,11 +1,12 @@
 package com.grupo3.sprint4.clases;
 
-public class Profesional {
+public class Profesional extends Usuario{
 	private String titulo;
     private String fechaIngreso;
 
     public Profesional(String titulo, String fechaIngreso) {
-        this.titulo = titulo;
+    	super();
+    	this.titulo = titulo;
         this.fechaIngreso = fechaIngreso;
     }
 
@@ -21,6 +22,12 @@ public class Profesional {
 
     public String getFechaIngreso() {
         return fechaIngreso;
+    }
+    
+    public void analizarUsuario() {
+        super.analizarUsuario();
+        System.out.println("Título: " + titulo);
+        System.out.println("Fecha de ingreso: " + fechaIngreso);
     }
 
     public String toString() {
