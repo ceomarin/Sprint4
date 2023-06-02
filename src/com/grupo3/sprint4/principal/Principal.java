@@ -1,21 +1,27 @@
 package com.grupo3.sprint4.principal;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.grupo3.sprint4.clases.Asesoria;
+import com.grupo3.sprint4.clases.Capacitacion;
 import com.grupo3.sprint4.clases.Cliente;
 import com.grupo3.sprint4.clases.Contenedor;
+import com.grupo3.sprint4.clases.Profesional;
 
 public class Principal {
+	public static Scanner entrada = new Scanner(System.in);
+	public static ArrayList<Asesoria> listaAsesoria = new ArrayList<Asesoria>();
+	public static ArrayList<Capacitacion> listaCapacitacion = new ArrayList<Capacitacion>();
+	public static Contenedor contenedor = new Contenedor(listaAsesoria,listaCapacitacion);
 	
 	
 	public static void main(String[] args) {
-		Scanner entrada = new Scanner(System.in);
 		boolean salida = false;
 		int tarea=0;
-		Contenedor contenedor = new Contenedor();
-		ArrayList<Asesoria> listaAsesoria = new ArrayList<Asesoria>();
+//		ArrayList<Asesoria> listaAsesoria = new ArrayList<Asesoria>();
 		
 		
 		
@@ -27,11 +33,15 @@ public class Principal {
 	        switch(tarea){
 	        case 1:
 	        	almacenarCliente();
-	        	Cliente cliente1 = new Cliente(11111111,"john","Doe","123456789","Cuprum",1,"Socoroma 555","Santiago");
-	        	contenedor.almacenarCliente(cliente1);
+//	        	Cliente cliente1 = new Cliente("john","Doe",LocalDate.of(1980,12,01),11111111,"123456789","Cuprum",1,"Socoroma 555","Santiago");
+//	        	contenedor.almacenarCliente(cliente1);
+//	        	contenedor.listarUsuarios();
 	            break;
 	        case 2:
 	        	almacenarProfesional();
+	        	Profesional profesional1 = new Profesional("john","Doe",LocalDate.of(1980,12,01),11111111,"Licenciado",LocalDate.of(2022,01,02));
+	        	contenedor.almacenarCliente(profesional1);
+	        	contenedor.listarUsuarios();
 	            break;
 	         case 3:
 	        	 almacenarAdministrativo();
@@ -77,10 +87,48 @@ public class Principal {
 	
 	public static void almacenarCliente() {
 		System.out.println("Has seleccionado la opcion 1");
+		
+		System.out.print("Ingrese Rut del Cliente, sin puntos ni guion: ");
+		int run = entrada.nextInt();
+		
+		System.out.print("Ingrese Nombres del Cliente: ");
+		String nombres = entrada.next();
+		nombres += entrada.nextLine();
+		
+		System.out.print("Ingrese Apellidos del Cliente: ");
+		String apellidos = entrada.nextLine();
+		
+		System.out.print("Ingrese fecha de nacimiento del usuario (DD/MM/AAAA): ");
+		String fechaString = entrada.next();
+		DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate fechaNacimiento = LocalDate.parse(fechaString, formatter);
+
+		System.out.print("Igrese telefono del Cliente: ");
+		String telefono = entrada.nextLine();
+		
+		
+		System.out.print("Ingrese afp del Cliente: ");
+		String afp = entrada.nextLine();
+		
+		System.out.print("Ingrese Sistema de salud: 1 (Fonasa) o 2 (Isapre): ");
+		int sistemaSalud = entrada.nextInt();
+		
+		System.out.print("Ingrese direccion del Cliente: ");
+		String direccion = entrada.nextLine();
+		
+		System.out.print("Ingrese comuna del Cliente: ");
+		String comuna = entrada.nextLine();
+		
+//		Cliente cliente2 = new Cliente("john","Doe",LocalDate.of(1980,12,01),11111111,"123456789","Cuprum",1,"Socoroma 555","Santiago");
+		Cliente cliente = new Cliente(nombres,apellidos,fechaNacimiento,run,telefono,afp,sistemaSalud,direccion,comuna);
+    	contenedor.almacenarCliente(cliente);
+    	contenedor.listarUsuarios();
+		
 	}
 	
 	public static void almacenarProfesional() {
 		System.out.println("Has seleccionado la opcion 2");
+		
 	}
 	
 	public static void almacenarAdministrativo() {

@@ -9,6 +9,7 @@ public class Contenedor {
 
 	public Contenedor() {
 		
+		
 	}
 	public Contenedor(ArrayList<Asesoria> asesorias,ArrayList<Capacitacion> capacitaciones) {
 		this.asesorias = asesorias;
@@ -36,6 +37,8 @@ public class Contenedor {
 
 	public void almacenarCliente(Asesoria cliente) {
 		asesorias.add(cliente);
+//		System.out.println(cliente);
+		
 	}
 
 	public void almacenarProfesional(Asesoria profesional) {
@@ -62,7 +65,7 @@ public class Contenedor {
 	public void listarUsuarios() {
 		for (Asesoria asesoria : asesorias) {
 			if (asesoria instanceof Usuario) {
-				System.out.println(asesoria);
+				asesoria.analizarUsuario();
 			}
 		}
 	}
