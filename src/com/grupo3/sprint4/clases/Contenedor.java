@@ -37,7 +37,6 @@ public class Contenedor {
 
 	public void almacenarCliente(Asesoria cliente) {
 		asesorias.add(cliente);
-//		System.out.println(cliente);
 		
 	}
 
@@ -76,6 +75,7 @@ public class Contenedor {
 				System.out.println(asesoria);
 			}
 		}
+		
 	}
 
 	public void listarCapacitaciones() {

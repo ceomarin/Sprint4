@@ -1,10 +1,12 @@
 package com.grupo3.sprint4.principal;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.grupo3.sprint4.clases.Administrativo;
 import com.grupo3.sprint4.clases.Asesoria;
 import com.grupo3.sprint4.clases.Capacitacion;
 import com.grupo3.sprint4.clases.Cliente;
@@ -80,7 +82,7 @@ public class Principal {
         System.out.println("4: Almacenar capacitación");
         System.out.println("5: Eliminar usuario");
         System.out.println("6: Listar usuarios");
-        System.out.println("7: Listar usuarios por tipo");
+        System.out.println("7: Listar usuarios");
         System.out.println("8: Listar capacitaciones");
         System.out.println("9: Salir");
 	}
@@ -119,7 +121,6 @@ public class Principal {
 		System.out.print("Ingrese comuna del Cliente: ");
 		String comuna = entrada.nextLine();
 		
-//		Cliente cliente2 = new Cliente("john","Doe",LocalDate.of(1980,12,01),11111111,"123456789","Cuprum",1,"Socoroma 555","Santiago");
 		Cliente cliente = new Cliente(nombres,apellidos,fechaNacimiento,run,telefono,afp,sistemaSalud,direccion,comuna);
     	contenedor.almacenarCliente(cliente);
     	contenedor.listarUsuarios();
@@ -128,30 +129,119 @@ public class Principal {
 	
 	public static void almacenarProfesional() {
 		System.out.println("Has seleccionado la opcion 2");
+		System.out.print("Ingrese Rut del Cliente, sin puntos ni guion: ");
+		int run = entrada.nextInt();
+		
+		System.out.print("Ingrese Nombre del Profesional: ");
+		String nombres = entrada.next();
+		nombres += entrada.nextLine();
+		
+		System.out.print("Ingrese Apellidos del Profesional: ");
+		String apellidos = entrada.nextLine();
+
+		System.out.print("Ingrese fecha de Nacimiento (DD/MM/AAAA): ");
+		String dateStringNacimiento = entrada.next();
+		//convert String to LocalDate
+		DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate diaFechaNacimiento = LocalDate.parse(dateStringNacimiento, formatter);
+		
+		System.out.print("Ingrese Titulo del Profesional: ");
+		String titulo = entrada.nextLine();
+		
+		System.out.print("Ingrese fecha de Ingreso (DD/MM/AAAA): ");
+		String dateStringIngreso = entrada.next();
+		DateTimeFormatter formatterIngreso =  DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate diaIngreso = LocalDate.parse(dateStringIngreso, formatterIngreso);
+		
+		Profesional profesional = new Profesional(nombres,apellidos,diaFechaNacimiento,run,titulo,diaIngreso);
+		contenedor.almacenarProfesional(profesional);
+		contenedor.listarUsuarios();
 		
 	}
 	
 	public static void almacenarAdministrativo() {
 		System.out.println("Has seleccionado la opcion 3");
+		System.out.print("Ingrese Rut, sin puntos ni guion: ");
+		int run = entrada.nextInt();
+		
+		System.out.print("Ingrese Nombres: ");
+		String nombres = entrada.next();
+		nombres += entrada.nextLine();
+		
+		System.out.print("Ingrese Apellidos: ");
+		String apellidos = entrada.nextLine();
+
+		System.out.print("Ingrese fecha de Nacimiento (DD/MM/AAAA): ");
+		String dateStringNacimiento = entrada.next();
+		//convert String to LocalDate
+		DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate diaFechaNacimiento = LocalDate.parse(dateStringNacimiento, formatter);
+		
+		System.out.print("Ingrese Area: ");
+		String area = entrada.nextLine();
+		
+		System.out.print("Ingrese Experiencia previa: ");
+		String experienciaPrevia = entrada.nextLine();
+		
+		Administrativo administrativo = new Administrativo(nombres,apellidos,diaFechaNacimiento,run,area,experienciaPrevia);
+		contenedor.almacenarAdministrativo(administrativo);
+		contenedor.listarUsuarios();
 	}
 
 	public static void almacenarCapacitacion() {
 		System.out.println("Has seleccionado la opcion 4");
+		System.out.print("Ingrese Rut, sin puntos ni guion: ");
+		int run = entrada.nextInt();
+		
+		System.out.print("Ingrese fecha de la Capacitacion (DD/MM/AAAA): ");
+		String dateString = entrada.next();
+		//convert String to LocalDate
+		DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate diaCapacitacion = LocalDate.parse(dateString, formatter);
+		
+		System.out.print("Ingrese hora de la capacitacion (HH:MM): ");
+		String horaString = entrada.next();
+        String[] partes = horaString.split(":");
+        String hora = partes[0];
+        String minuto = partes[1];
+        LocalTime horaCapacitacion = LocalTime.of(Integer.parseInt(hora), Integer.parseInt(minuto),0);
+        
+        System.out.print("Ingrese lugar de la Capacitacion: ");
+		String lugar = entrada.nextLine();
+		
+		System.out.print("Ingrese duracion en horas de la Capacitacion: ");
+		int duracion = entrada.nextInt();
+		
+		System.out.print("Ingrese cantidad de asistentes a la Capacitacion: ");
+		int cantidadAsistentes = entrada.nextInt();
+		
+		Capacitacion capacitacion = new Capacitacion(run,diaCapacitacion,horaCapacitacion,lugar,duracion,cantidadAsistentes);
+		contenedor.almacenarCapacitacion(capacitacion);
+		
 	}
 	
 	public static void eliminarUsuario() {
 		System.out.println("Has seleccionado la opcion 5");
+		System.out.print("Ingrese Rut del Cliente, sin puntos ni guion a Eliminar: ");
+		int run = entrada.nextInt();
+		contenedor.eliminarUsuario(run);
 	}
 	
 	public static void listarUsuarios() {
 		System.out.println("Has seleccionado la opcion 6");
+		contenedor.listarUsuarios();
 	}
 	
 	public static void listarUsuariosPorTipo() {
 		System.out.println("Has seleccionado la opcion 7");
+		System.out.print("Ingrese Tipo de Usuario a Listar: Cliente, Profesional o Administrativo.: ");
+		String tipoUsuario = entrada.nextLine();
+		contenedor.listarUsuariosPorTipo(tipoUsuario);
+		
 	}
 	
 	public static void listarCapacitaciones() {
 		System.out.println("Has seleccionado la opcion 8");
+		contenedor.listarCapacitaciones();
 	}
 }
