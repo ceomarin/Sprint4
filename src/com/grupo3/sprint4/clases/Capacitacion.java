@@ -5,7 +5,7 @@ import java.time.LocalTime;
 public class Capacitacion {
 	private final int id;
     private int rut;
-    private LocalDate dia;
+    private String dia;
     private LocalTime hora;
     private String lugar;
     private int duracion;
@@ -16,7 +16,7 @@ public class Capacitacion {
     	this.id = ++Capacitacion.contador;
     }
     
-    public Capacitacion(int rut, LocalDate dia, LocalTime hora, String lugar, int duracion, int cantidadAsistentes) {
+    public Capacitacion(int rut, String dia, LocalTime hora, String lugar, int duracion, int cantidadAsistentes) {
         this();
         this.rut = rut;
         this.dia = dia;
@@ -38,11 +38,11 @@ public class Capacitacion {
         this.rut = rut;
     }
     
-    public LocalDate getDia() {
+    public String getDia() {
         return dia;
     }
 
-    public void setDia(LocalDate dia) {
+    public void setDia(String dia) {
         this.dia = dia;
     }
 

@@ -81,37 +81,67 @@ public class Principal {
 	public static void almacenarCliente() {
 		System.out.println("Has seleccionado la opcion 1");
 		
-		System.out.print("Ingrese Rut del Cliente, sin puntos ni guion: ");
-		int run = entrada.nextInt();
-		
-		System.out.print("Ingrese Nombres del Cliente: ");
-		String nombres = entrada.next();
-		nombres += entrada.nextLine();
-		
-		System.out.print("Ingrese Apellidos del Cliente: ");
-		String apellidos = entrada.nextLine();
-		
-		System.out.print("Ingrese fecha de nacimiento del usuario (DD/MM/AAAA): ");
-		String fechaString = entrada.next();
-		DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDate fechaNacimiento = LocalDate.parse(fechaString, formatter);
 
-		System.out.print("Igrese telefono del Cliente: ");
-		String telefono = entrada.nextLine();
-		
-		
-		System.out.print("Ingrese afp del Cliente: ");
-		String afp = entrada.nextLine();
-		
-		System.out.print("Ingrese Sistema de salud: 1 (Fonasa) o 2 (Isapre): ");
-		int sistemaSalud = entrada.nextInt();
-		
-		System.out.print("Ingrese direccion del Cliente: ");
-		String direccion = entrada.nextLine();
-		
-		System.out.print("Ingrese comuna del Cliente: ");
-		String comuna = entrada.nextLine();
-		
+        int run;
+        do {
+            System.out.print("Ingrese Rut del Cliente, sin puntos ni guion: ");
+            run = entrada.nextInt();
+        } while (run > 0 && run < 99999999);
+
+        entrada.nextLine(); // Limpiar el buffer de entrada
+
+        String nombres;
+        do {
+            System.out.print("Ingrese Nombres del Cliente (min. 5 caracteres, max. 30): ");
+            nombres = entrada.nextLine();
+        } while (nombres.length() < 5 || nombres.length() > 30);
+
+        String apellidos;
+        do {
+            System.out.print("Ingrese Apellidos del Cliente (min. 5 caracteres, max. 30): ");
+            apellidos = entrada.nextLine();
+        } while (apellidos.length() < 5 || apellidos.length() > 30);
+
+        LocalDate fechaNacimiento;
+        do {
+            System.out.print("Ingrese fecha de nacimiento del usuario (DD/MM/AAAA): ");
+            String fechaString = entrada.next();
+            entrada.nextLine(); // Limpiar el buffer de entrada
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            fechaNacimiento = LocalDate.parse(fechaString, formatter);
+        } while (fechaNacimiento == null);
+
+        System.out.print("Ingrese teléfono del Cliente: ");
+        String telefono = entrada.nextLine();
+
+        String afp;
+        do {
+            System.out.print("Ingrese AFP del Cliente (min. 4 caracteres, max. 30): ");
+            afp = entrada.nextLine();
+        } while (afp.length() < 4 || afp.length() > 30);
+
+        int sistemaSalud;
+        do {
+            System.out.print("Ingrese Sistema de salud (1: Fonasa, 2: Isapre): ");
+            sistemaSalud = entrada.nextInt();
+        } while (sistemaSalud != 1 && sistemaSalud != 2);
+
+        entrada.nextLine(); // Limpiar el buffer de entrada
+
+        String direccion;
+        do {
+            System.out.print("Ingrese dirección del Cliente (max. 70 caracteres): ");
+            direccion = entrada.nextLine();
+        } while (direccion.length() > 70);
+
+        String comuna;
+        do {
+            System.out.print("Ingrese comuna del Cliente (max. 50 caracteres): ");
+            comuna = entrada.nextLine();
+        } while (comuna.length() > 50);
+        
+        
 		Cliente cliente = new Cliente(nombres,apellidos,fechaNacimiento,run,telefono,afp,sistemaSalud,direccion,comuna);
     	contenedor.almacenarCliente(cliente);
     	contenedor.listarUsuarios();
@@ -120,31 +150,58 @@ public class Principal {
 	
 	public static void almacenarProfesional() {
 		System.out.println("Has seleccionado la opcion 2");
-		System.out.print("Ingrese Rut del Cliente, sin puntos ni guion: ");
-		int run = entrada.nextInt();
 		
-		System.out.print("Ingrese Nombre del Profesional: ");
-		String nombres = entrada.next();
-		nombres += entrada.nextLine();
-		
-		System.out.print("Ingrese Apellidos del Profesional: ");
-		String apellidos = entrada.nextLine();
+		int run;
+        do {
+            System.out.print("Ingrese Rut del Profesional, sin puntos ni guion: ");
+            run = entrada.nextInt();
+        } while (run > 0 && run < 99999999);
 
-		System.out.print("Ingrese fecha de Nacimiento (DD/MM/AAAA): ");
-		String dateStringNacimiento = entrada.next();
-		//convert String to LocalDate
-		DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDate diaFechaNacimiento = LocalDate.parse(dateStringNacimiento, formatter);
+        entrada.nextLine(); // Limpiar el buffer de entrada
+
+        String nombres;
+        do {
+            System.out.print("Ingrese Nombres del Profesional (min. 5 caracteres, max. 30): ");
+            nombres = entrada.nextLine();
+        } while (nombres.length() < 5 || nombres.length() > 30);
+
+        String apellidos;
+        do {
+            System.out.print("Ingrese Apellidos del Profesional (min. 5 caracteres, max. 30): ");
+            apellidos = entrada.nextLine();
+        } while (apellidos.length() < 5 || apellidos.length() > 30);
+
+        LocalDate fechaNacimiento;
+        do {
+            System.out.print("Ingrese fecha de nacimiento del Profesional (DD/MM/AAAA): ");
+            String fechaString = entrada.next();
+            entrada.nextLine(); // Limpiar el buffer de entrada
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            fechaNacimiento = LocalDate.parse(fechaString, formatter);
+        } while (fechaNacimiento == null);
 		
-		System.out.print("Ingrese Titulo del Profesional: ");
-		String titulo = entrada.nextLine();
+        String titulo;
+        do {
+            System.out.print("Ingrese Titulo del Profesional: ");
+            titulo = entrada.nextLine();
+            if (titulo.length() < 10 || titulo.length() > 50) {
+                System.out.println("El título debe tener entre 10 y 50 caracteres.");
+            }
+        } while (titulo.length() < 10 || titulo.length() > 50);
 		
-		System.out.print("Ingrese fecha de Ingreso (DD/MM/AAAA): ");
-		String dateStringIngreso = entrada.next();
-		DateTimeFormatter formatterIngreso =  DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDate diaIngreso = LocalDate.parse(dateStringIngreso, formatterIngreso);
 		
-		Profesional profesional = new Profesional(nombres,apellidos,diaFechaNacimiento,run,titulo,diaIngreso);
+        LocalDate diaIngreso;
+        do {
+            System.out.print("Ingrese fecha de Ingreso (DD/MM/AAAA): ");
+            String fechaString = entrada.next();
+            entrada.nextLine(); // Limpiar el buffer de entrada
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            diaIngreso = LocalDate.parse(fechaString, formatter);
+        } while (diaIngreso == null);
+        
+		
+		Profesional profesional = new Profesional(nombres,apellidos,fechaNacimiento,run,titulo,diaIngreso);
 		contenedor.almacenarProfesional(profesional);
 		contenedor.listarUsuarios();
 		
@@ -152,59 +209,132 @@ public class Principal {
 	
 	public static void almacenarAdministrativo() {
 		System.out.println("Has seleccionado la opcion 3");
-		System.out.print("Ingrese Rut, sin puntos ni guion: ");
-		int run = entrada.nextInt();
 		
-		System.out.print("Ingrese Nombres: ");
-		String nombres = entrada.next();
-		nombres += entrada.nextLine();
 		
-		System.out.print("Ingrese Apellidos: ");
-		String apellidos = entrada.nextLine();
+		int run;
+        do {
+            System.out.print("Ingrese Rut del Administrativo, sin puntos ni guion: ");
+            run = entrada.nextInt();
+        } while (run > 0 && run < 99999999);
 
-		System.out.print("Ingrese fecha de Nacimiento (DD/MM/AAAA): ");
-		String dateStringNacimiento = entrada.next();
-		//convert String to LocalDate
-		DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDate diaFechaNacimiento = LocalDate.parse(dateStringNacimiento, formatter);
+        entrada.nextLine(); // Limpiar el buffer de entrada
+
+        String nombres;
+        do {
+            System.out.print("Ingrese Nombres del Administrativo (min. 5 caracteres, max. 30): ");
+            nombres = entrada.nextLine();
+        } while (nombres.length() < 5 || nombres.length() > 30);
+
+        String apellidos;
+        do {
+            System.out.print("Ingrese Apellidos del Administrativo (min. 5 caracteres, max. 30): ");
+            apellidos = entrada.nextLine();
+        } while (apellidos.length() < 5 || apellidos.length() > 30);
+
+        LocalDate fechaNacimiento;
+        do {
+            System.out.print("Ingrese fecha de nacimiento del Administrativo (DD/MM/AAAA): ");
+            String fechaString = entrada.next();
+            entrada.nextLine(); // Limpiar el buffer de entrada
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            fechaNacimiento = LocalDate.parse(fechaString, formatter);
+        } while (fechaNacimiento == null);
 		
-		System.out.print("Ingrese Area: ");
-		String area = entrada.nextLine();
+        String area;
+        do {
+        	System.out.print("Ingrese Area del Administrativo: ");
+    		area = entrada.nextLine();
+        } while (area.length() < 5 || area.length() > 20);
+
+        String experienciaPrevia;
+        do {
+			System.out.print("Ingrese Experiencia previa: ");
+			experienciaPrevia = entrada.nextLine();
+        } while (experienciaPrevia.length() > 100);
 		
-		System.out.print("Ingrese Experiencia previa: ");
-		String experienciaPrevia = entrada.nextLine();
-		
-		Administrativo administrativo = new Administrativo(nombres,apellidos,diaFechaNacimiento,run,area,experienciaPrevia);
+		Administrativo administrativo = new Administrativo(nombres,apellidos,fechaNacimiento,run,area,experienciaPrevia);
 		contenedor.almacenarAdministrativo(administrativo);
 		contenedor.listarUsuarios();
 	}
 
 	public static void almacenarCapacitacion() {
+		
 		System.out.println("Has seleccionado la opcion 4");
-		System.out.print("Ingrese Rut, sin puntos ni guion: ");
-		int run = entrada.nextInt();
 		
-		System.out.print("Ingrese fecha de la Capacitacion (DD/MM/AAAA): ");
-		String dateString = entrada.next();
-		//convert String to LocalDate
-		DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDate diaCapacitacion = LocalDate.parse(dateString, formatter);
+		int run;
+	    do {
+	        System.out.print("Ingrese RUT, sin puntos ni guion: ");
+	        run = entrada.nextInt();
+	        if (run <= 0 || run > 99999999) {
+	            System.out.println("El RUT debe ser un número mayor a cero y menor o igual a 99999999.");
+	        }
+	    } while (run <= 0 || run > 99999999);
 		
-		System.out.print("Ingrese hora de la capacitacion (HH:MM): ");
-		String horaString = entrada.next();
-        String[] partes = horaString.split(":");
-        String hora = partes[0];
-        String minuto = partes[1];
-        LocalTime horaCapacitacion = LocalTime.of(Integer.parseInt(hora), Integer.parseInt(minuto),0);
-        
-        System.out.print("Ingrese lugar de la Capacitacion: ");
-		String lugar = entrada.nextLine();
+	    String diaCapacitacion;
+	    boolean diaValido;
+	    do {
+	        System.out.print("Ingrese día de la semana (lunes a domingo): ");
+	        diaCapacitacion = entrada.next();
+	        diaCapacitacion = diaCapacitacion.toLowerCase();
+	        
+	        diaValido = diaCapacitacion.equalsIgnoreCase("lunes") || diaCapacitacion.equalsIgnoreCase("martes")
+	                || diaCapacitacion.equalsIgnoreCase("miercoles") || diaCapacitacion.equalsIgnoreCase("jueves")
+	                || diaCapacitacion.equalsIgnoreCase("viernes") || diaCapacitacion.equalsIgnoreCase("sabado")
+	                || diaCapacitacion.equalsIgnoreCase("domingo");
+	        if (!diaValido) {
+	            System.out.println("El día ingresado no es válido. Intente nuevamente.");
+	        }
+	    } while (!diaValido);
 		
+	    LocalTime horaCapacitacion = null;
+	    boolean horaValida;
+	    do {
+	        System.out.print("Ingrese hora de la capacitación (HH:MM): ");
+	        String horaString = entrada.next();
+	        String[] partes = horaString.split(":");
+	        String hora = partes[0];
+	        String minuto = partes[1];
+	        horaValida = true;
+	        try {
+	            int horaInt = Integer.parseInt(hora);
+	            int minutoInt = Integer.parseInt(minuto);
+	            if (horaInt < 0 || horaInt > 23 || minutoInt < 0 || minutoInt > 59) {
+	                System.out.println("La hora ingresada no es válida. Intente nuevamente.");
+	                horaValida = false;
+	            } else {
+	                horaCapacitacion = LocalTime.of(horaInt, minutoInt, 0);
+	            }
+	        } catch (NumberFormatException e) {
+	            System.out.println("Formato de hora incorrecto. Intente nuevamente.");
+	            horaValida = false;
+	        }
+	    } while (!horaValida);
+	    
+	    String lugar;
+	    do {
+	        System.out.print("Ingrese lugar de la capacitación: ");
+	        lugar = entrada.nextLine();
+	        if (lugar.length() < 10 || lugar.length() > 50) {
+	            System.out.println("El lugar debe tener entre 10 y 50 caracteres.");
+	        }
+	    } while (lugar.length() < 10 || lugar.length() > 50);
+	    
+		int duracion;
+		do {
 		System.out.print("Ingrese duracion en horas de la Capacitacion: ");
-		int duracion = entrada.nextInt();
+		duracion = entrada.nextInt();
+		}while(duracion>70);
 		
-		System.out.print("Ingrese cantidad de asistentes a la Capacitacion: ");
-		int cantidadAsistentes = entrada.nextInt();
+	    int cantidadAsistentes;
+	    do {
+	        System.out.print("Ingrese cantidad de asistentes a la capacitación: ");
+	        cantidadAsistentes = entrada.nextInt();
+	        if (cantidadAsistentes <= 0 || cantidadAsistentes >= 1000) {
+	            System.out.println("La cantidad de asistentes debe ser un número mayor a cero y menor a 1000.");
+	        }
+	    } while (cantidadAsistentes <= 0 || cantidadAsistentes >= 1000);
+	    
 		
 		Capacitacion capacitacion = new Capacitacion(run,diaCapacitacion,horaCapacitacion,lugar,duracion,cantidadAsistentes);
 		contenedor.almacenarCapacitacion(capacitacion);
